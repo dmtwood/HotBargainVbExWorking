@@ -1,0 +1,31 @@
+﻿@model List<Project>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+@foreach (var project in Model)
+{
+
+    <h2> @project.ProjectNaam</h2>
+
+    <p> Status van project : @project.Status</p>
+
+    <ul>
+        @{
+            int aantalMedewerkers = 0;
+            foreach (var projMedewerker in project.Personeelsleden)
+            {
+
+            <li>
+                @projMedewerker.Voornaam , @projMedewerker.Achternaam
+            </li>
+            @(aantalMedewerkers++)
+            }
+            }
+    </ul>
+    <p> Aantal medewerkers op dit project: @aantalMedewerkers</p>
+
+}
