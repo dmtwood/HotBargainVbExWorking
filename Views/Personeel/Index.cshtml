@@ -1,0 +1,52 @@
+﻿@model IEnumerable<HotBargainVbEx.Models.Personeel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Personeelsleden</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th> Afbeelding</th>
+            <th> @Html.DisplayNameFor(model => model.UserName) </th>
+            <th> @Html.DisplayNameFor(model => model.Voornaam) </th>
+            <th> @Html.DisplayNameFor(model => model.Achternaam) </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @{ byte[] afbeelding = null;
+                                    try
+                                    {
+                                        afbeelding = System.IO.File.ReadAllBytes(ViewBag.wwwdir + "\\" + item.Achternaam + ".jpg");
+                                    }
+                                    catch (System.IO.FileNotFoundException)
+                                    {
+
+                                        afbeelding = System.IO.File.ReadAllBytes(ViewBag.wwwdir + "\\unknown.jpg");
+                                    } }
+
+                @if (afbeelding != null)
+                {
+                    <img src="data:image/png;base64,@Convert.ToBase64String(afbeelding)"> }
+                        else
+                        {
+                        <text>Geen afbeelding beschikbaar!</text>                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Voornaam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Achternaam)
+            </td>
+        </tr>}
+    </tbody>
+</table>

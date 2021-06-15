@@ -25,5 +25,10 @@ namespace HotBargainVbEx.Controllers
             List<Project> projecten = _context.Projecten.Include("Personeelsleden").ToList();
             return View(projecten);
         }
+
+       public async Task<IActionResult> Koppelpersoneel()
+        {
+            return View();
+        }
     }
 }
